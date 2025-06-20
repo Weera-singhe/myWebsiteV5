@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ITEMS_API_URL } from "./api/urls"; // <-- import here
 
 function App() {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
 
-  // Change this to your backend URL in production
-  const API_URL = "https://mywebsite-backend-u5tr.onrender.com/api/items";
-
   useEffect(() => {
     axios
-      .get(API_URL)
+      .get(ITEMS_API_URL)
       .then((res) => setItems(res.data))
       .catch((err) => console.error("Error fetching items:", err));
   }, []);
@@ -20,7 +18,7 @@ function App() {
     if (!newItem.trim()) return;
 
     axios
-      .post(API_URL, { name: newItem })
+      .post(ITEMS_API_URL, { name: newItem })
       .then((res) => {
         setItems([...items, res.data]);
         setNewItem("");
