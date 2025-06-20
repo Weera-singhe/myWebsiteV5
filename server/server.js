@@ -30,10 +30,7 @@ app.get("/api/items", async (req, res) => {
 // Route to add a new item
 app.post("/api/items", async (req, res) => {
   const { name } = req.body;
-
-  if (!name) {
-    return res.status(400).json({ error: "Item name is required" });
-  }
+  if (!name) return res.status(400).json({ error: "Item name is required" });
 
   try {
     const result = await pool.query(
